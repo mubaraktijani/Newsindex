@@ -1,0 +1,160 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu" id="side-menu">
+			<li class="nav-header">
+				<div class="profile-element" dropdown>
+					<img alt="image" class="img-circle" src="assets/images/profile_small.jpg">
+					<a dropdownToggle>
+						<span class="block m-t-xs">
+							<strong class="font-bold">{{ user.name }}</strong>
+						</span>
+						<span class="text-muted text-xs block">{{user.email}}
+							<b class="caret"></b>
+						</span>
+					</a>
+					<ul class="animated fadeInRight dropdown-menu" *dropdownMenu>
+						<li>
+							<a [routerLink]="['/users']">Users</a>
+						</li>
+						<li>
+							<a [routerLink]="['/settings']">Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="javascript:;" (click)="logout()">Log out</a>
+						</li>
+					</ul>
+				</div>
+				<div class="logo-element">
+					IN+
+				</div>
+			</li>
+			<li routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}">
+				<a [routerLink]="['']" title="Home">
+					<i class="fa fa-dashboard"></i>
+					<span class="nav-label">Dashboard</span>
+				</a>
+			</li>
+
+			<li routerLinkActive='active'>
+				<a routerLink="/alerts" title="Alerts">
+					<i class="fa fa-bell"></i>
+					<span class="nav-label">Alerts</span>
+				</a>
+			</li>
+
+			<li routerLinkActive='active'>
+				<a routerLink="/bookmarks" title="My Bookmarks">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">Bookmarks</span>
+				</a>
+			</li>
+
+			<li [ngClass]="(activeRoute('Subscriptions')) ? 'active' : ''">
+				<a href="javascript:;" title="My Subscriptions">
+					<i class="fa fa-share-alt"></i>
+					<span class="nav-label">Subscriptions</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse" [ngClass]="{active: activeRoute('categories')}">
+					<li [ngClass]="{active: activeRoute('categories')}">
+						<a routerLink="/subscription/blogs">By Blogs</a>
+					</li>
+					<li [ngClass]="{active: activeRoute('roles')}">
+						<a routerLink="/subscription/categories">By Category</a>
+					</li>
+					<li [ngClass]="{active: activeRoute('permissions')}">
+						<a routerLink="/subscription/writers">By Writers</a>
+					</li>
+				</ul>
+			</li>
+
+			<li [ngClass]="(activeRoute('blogs')) ? 'active' : ''">
+				<a href="javascript:;" title="Blogs">
+					<i class="fa fa-globe"></i>
+					<span class="nav-label">Blogs</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse" [ngClass]="{active: activeRoute('categories')}">
+					<li [ngClass]="{active: activeRoute('blogs', false)}">
+						<a routerLink="/blogs">Browse</a>
+					</li>
+					<li [ngClass]="{active: activeRoute(['blogs', this.routeParam[1], 'categories' ])}">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'" [routerLink]="'/blogs/' + this.routeParam[1] + '/categories'">
+							By Category
+						</a>
+					</li>
+					<li [ngClass]="{active: activeRoute(['blogs', this.routeParam[1], 'writers' ])}">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'" [routerLink]="'/blogs/' + this.routeParam[1] + '/writers'">
+							By Writers
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li [ngClass]="{active: activeRoute('categories')}">
+				<a href="javascript:;" title="Categories">
+					<i class="fa fa-tag"></i>
+					<span class="nav-label">Categories</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse" [ngClass]="{active: activeRoute('categories')}">
+					<li [ngClass]="{active: activeRoute('categories', false)}">
+						<a routerLink="/categories">Browse</a>
+					</li>
+					<li [ngClass]="{active: activeRoute(['categories', this.routeParam[1], 'blogs' ])}">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'" [routerLink]="'/categories/' + this.routeParam[1] + '/blogs'">
+							By Blogs
+						</a>
+					</li>
+					<li [ngClass]="{active: activeRoute('permissions')}">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'" [routerLink]="'/categories/' + this.routeParam[1] + '/writers'">
+							By Writers
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li routerLinkActive='active'>
+				<a routerLink="/writers" title="Writers">
+					<i class="fa fa-group"></i>
+					<span class="nav-label">Writers</span>
+				</a>
+			</li>
+
+			<li routerLinkActive='active'>
+				<a routerLink="/entities" title="Entities">
+					<i class="fa fa-sitemap"></i>
+					<span class="nav-label">Entities</span>
+				</a>
+			</li>
+
+			<li [ngClass]="(activeRoute('viewed')) ? 'active' : ''">
+				<a href="javascript:;" title="Viewed">
+					<i class="fa fa-eye"></i>
+					<span class="nav-label">Viewed</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse" [ngClass]="{active: activeRoute('users')}">
+					<li [ngClass]="{active: activeRoute('users')}">
+						<a routerLink="/viewed/blogs">Blog</a>
+					</li>
+					<li [ngClass]="{active: activeRoute('roles')}">
+						<a routerLink="/viewed/categories">Category</a>
+					</li>
+					<li [ngClass]="{active: activeRoute('permissions')}">
+						<a routerLink="/viewed/writers">Writer</a>
+					</li>
+				</ul>
+			</li>
+
+			<li routerLinkActive='active'>
+				<a [routerLink]="['/settings']" title="Settings">
+					<i class="fa fa-gears"></i>
+					<span class="nav-label">Settings</span>
+				</a>
+			</li>
+		</ul>
+
+	</div>
+</nav>

@@ -1,0 +1,50 @@
+<app-pageHeader-layout [name]="title" [breadcrumb]="breadcrumb"></app-pageHeader-layout>
+
+<div class="wrapper wrapper-content  animated fadeInRight article">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="ibox">
+				<div class="ibox-content h-300" [ngClass]="{'sk-loading': isLoading}">
+					<app-loading-layout class="sk-spinner" [visibility]="isLoading"></app-loading-layout>
+
+					<ng-container *ngIf="data.hasOwnProperty('category_name')">
+						<div class="pull-right">
+							<button class="btn btn-white btn-xs" type="button">{{data.category_name}}</button>
+							<!--<button class="btn btn-white btn-xs" type="button">Publishing</button>
+							<button class="btn btn-white btn-xs" type="button">Modern</button>-->
+						</div>
+						<div class="text-center article-title" style="margin-bottom: 40px;">
+							<span class="text-muted">
+								<i class="fa fa-clock-o"></i> {{data.news_date}}
+								<!--28th Oct 2015-->
+							</span>
+							<h1 [innerHTML]="data.title"></h1>
+						</div>
+						<p [innerHTML]="data.description"></p>
+
+						<hr>
+						<div class="row">
+							<div class="col-md-6">
+								<h5>Tags:</h5>
+								<button class="btn btn-primary btn-xs m-r-xs" type="button">{{data.category_name}}</button>
+								<button class="btn btn-white btn-xs" type="button">{{data.channel_name}}</button>
+							</div>
+							<div class="col-md-6 text-right">
+								<a [href]="data.link" class="pull-right btn btn-sm btn-primary">
+									<i class="fa fa-reply"></i> Read more</a>
+								<!--<div class="small text-right">
+									<h5>Stats:</h5>
+									<div>
+										<i class="fa fa-comments-o"> </i> 56 comments </div>
+									<i class="fa fa-eye"> </i> 144 views
+								</div>-->
+							</div>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>

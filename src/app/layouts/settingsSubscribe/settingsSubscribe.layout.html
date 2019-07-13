@@ -1,0 +1,113 @@
+<div class="row">
+	<div class="col-md-8">
+		<h2 class="m-t-xxs">{{ title }} <span
+				*ngIf="data.hasOwnProperty('browse') && data.browse.length">({{data.browse.length}})</span></h2>
+		<p [innerHTML]="desc"></p>
+	</div>
+	<div class="col-md-4">
+		<button type="button" (click)="onSubscribeNew()" class="btn btn-primary pull-right" data-toggle="modal"
+			[attr.data-target]="'#myModal-' + type">
+			<i class="fa fa-pencil"></i> Add New
+		</button>
+	</div>
+</div>
+
+<div class="slimScrollDiv">
+	<div class="full-height-scroll">
+		<div class="table-responsive">
+			<table class="table table-hover issue-tracker" *ngIf="data">
+				<ng-container *ngIf="data.hasOwnProperty('browse')">
+					<tr *ngFor="let sub of data.browse; let i = index">
+						<td class="issue-info" [class.no-borders]="i === 0">
+							<a class="font-normal text-capitalize" href="javascript:;" *ngIf="!editable">
+								{{sub.name}}
+							</a>
+							<a class="font-normal text-capitalize" href="javascript:;" (click)="onEdit(sub.id)"
+								*ngIf="editable" data-toggle="modal" [attr.data-target]="'#myModal-' + type">
+								{{sub.name}}
+							</a>
+						</td>
+						<td class="issue-info" [class.no-borders]="i === 0" *ngIf="sub.hint !== undefined">
+							{{sub.hint}}
+						</td>
+						<td [class.no-borders]="i === 0">
+							<button type="button" (click)="onDelete(i)" class="btn btn-danger btn-xs pull-right">
+								<i class="fa fa-trash-o"></i> Delete
+							</button>
+							<button type="button" (click)="onEdit(sub.id)" *ngIf="editable"
+								class="btn btn-primary btn-xs m-r-xs pull-right" data-toggle="modal"
+								[attr.data-target]="'#myModal-' + type">
+								<i class="fa fa-pencil"></i> Edit
+							</button>
+						</td>
+					</tr>
+				</ng-container>
+			</table>
+		</div>
+	</div>
+
+
+
+	<div class="modal inmodal" [id]="'myModal-' + type" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeInRight">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">{{ modalTitle }}</h4>
+					<small>{{ modalDesc }}</small>
+				</div>
+				<div class="modal-body" [class.no-padding]="!ngContent">
+					<ng-content *ngIf="ngContent"></ng-content>
+					<div class="ibox no-margins" *ngIf="!ngContent">
+						<div class="ibox-content no-borders scroll" [class.h-200]="!ngContent"
+							[ngClass]="{'sk-loading': isLoading}">
+							<app-loading-layout class="sk-spinner" [visibility]="isLoading"></app-loading-layout>
+
+							<div class="table-responsive">
+								<table class="table table-hover issue-tracker no-margins"
+									*ngIf="modalData && modalData.length">
+									<tr>
+										<th class="check-mail no-borders">
+											<input iCheck [value]="isAllSelected()" [checked]="isAllSelected()"
+												(ifChanged)="selectAll($event)" type="checkbox">
+										</th>
+										<ng-container *ngFor="let title of modalDataTitle">
+											<th class="text-uppercase no-borders">{{ title }}</th>
+										</ng-container>
+									</tr>
+									<tr *ngFor="let sub of modalData; let i = index">
+										<td class="check-mail">
+											<input iCheck [value]="sub.checked" [checked]="sub.checked"
+												(ifChanged)="select($event, i)" type="checkbox">
+										</td>
+										<ng-container *ngFor="let key of modalDataTitle">
+											<td>
+												<a class="font-normal text-capitalize text-primary" href="javascript:;">
+													{{ sub[key] }}
+												</a>
+											</td>
+										</ng-container>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubscribe()"
+						*ngIf="!isEdit && !ngContent">Subscribe</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onUpdate()"
+						*ngIf="isEdit && !ngContent">Save
+						Changes</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onModalSave()"
+						*ngIf="ngContent">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

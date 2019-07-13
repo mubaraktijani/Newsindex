@@ -1,0 +1,17 @@
+<div class="ibox float-e-margins">
+	<div class="ibox-content h-300 animated fadeInRight" [ngClass]="{'sk-loading': loading}">
+		<app-loading-layout class="sk-spinner" [visibility]="loading"></app-loading-layout>
+		<div class="">
+			<app-browserControl-layout [data]="data" [pagination]="pagination" [selected]="selected" [controlMenu]="controlMenu"
+			 (onControlItemClicked)="loadData($event)">
+			</app-browserControl-layout>
+		</div>
+		<div class="">
+			<app-browserNavigation-layout [data]="navigation" *ngIf="navigation.length" [href]="_href" [controlMenu]="controlMenu"></app-browserNavigation-layout>
+			<app-news-layout [data]="data" *ngIf="data.length" [selected]="selected"></app-news-layout>
+
+			<h2 class="text-muted text-center p-h-xl" *ngIf="!navigation.length && !data.length">No
+				Content Available!</h2>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,28 @@
+<app-pageHeader-layout [name]="title" [breadcrumb]="breadcrumb"></app-pageHeader-layout>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+				<div class="ibox-content h-300" [ngClass]="{'sk-loading': isLoading}">
+					<app-loading-layout class="sk-spinner" [visibility]="isLoading"></app-loading-layout>
+
+					<div class="">
+						<app-browserControl-layout [data]="response.data" [pagination]="response" [controlMenu]="controlMenu"
+						 (onControlItemClicked)="onSearch($event)">
+						</app-browserControl-layout>
+					</div>
+
+					<ng-container *ngIf="response.data">
+						<div class="">
+							<app-news-layout [data]="response.data"></app-news-layout>
+						</div>
+					</ng-container>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

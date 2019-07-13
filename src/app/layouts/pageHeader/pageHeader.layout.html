@@ -1,0 +1,33 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><span *ngIf="icon" [ngClass]="icon" class="m-r"></span>{{ name }}</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a [routerLink]="['']">Home</a>
+			</li>
+			<li *ngFor="let item of breadcrumb; let i = index" [ngClass]="{active: breadcrumb.length -1 === i}">
+				<a *ngIf="breadcrumb.length -1 !== i" [routerLink]="item.router">{{item.title}}</a>
+				<strong *ngIf="breadcrumb.length -1 === i">{{ item.title }}</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2">
+		<div *ngIf="action" class="title-action">
+			<button type="button"
+				*ngIf="!action.href"
+				[routerLink]="action.router"
+				[ngClass]="action.class"
+				(click)="action.onClick"
+				class="btn btn-primary btn-sm">
+				<i *ngIf="action.icon" [class]="action.icon"></i> {{ action.name }}
+			</button>
+			<a *ngIf="action.href"
+				[href]="action.href"
+				[ngClass]="action.class"
+				(click)="action.onClick"
+				class="btn btn-primary btn-sm">
+				<i *ngIf="action.icon" [class]="action.icon"></i> {{ action.name }}
+			</a>
+		</div>
+	</div>
+</div>

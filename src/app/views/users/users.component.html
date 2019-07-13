@@ -1,0 +1,126 @@
+<app-pageHeader-layout [name]="title" [breadcrumb]="breadcrumb" [href]="href"></app-pageHeader-layout>
+
+<div class="wrapper wrapper-content animated slideIn">
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+				<div class="ibox-content" [ngClass]="{'sk-loading': isLoading}">
+
+					<app-loading-layout class="sk-spinner" [visibility]="isLoading"></app-loading-layout>
+
+					<app-tab-layout>
+						<app-tab-content-layout *ngFor="let tab of tabs; let i = index" [icon]="tab.icon" [title]="tab.title" [active]="tab.active">
+							<div class="row">
+								<div *ngFor="let user of tab.data; let i = index" class="col-lg-4">
+									<div class="contact-box">
+										<a href="profile.html">
+											<div class="col-sm-4">
+												<div class="text-center">
+													<img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">
+													<div class="m-t-xs font-bold">Graphics designer</div>
+												</div>
+											</div>
+											<div class="col-sm-8">
+												<h3><strong>John Smith</strong></h3>
+												<p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+												<address>
+													<strong>Twitter, Inc.</strong><br>
+													795 Folsom Ave, Suite 600<br>
+													San Francisco, CA 94107<br>
+													<abbr title="Phone">P:</abbr> (123) 456-7890
+												</address>
+											</div>
+											<div class="clearfix"></div>
+										</a>
+									</div>
+								</div>
+							</div>
+
+							<h2 class="text-muted text-center p-h-xl" *ngIf="tab.data && !tab.data.length">
+								No {{tab.title}} Available!
+							</h2>
+						</app-tab-content-layout>
+					</app-tab-layout>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="contact-box">
+				<a href="profile.html">
+					<div class="col-sm-4">
+						<div class="text-center">
+							<img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">
+							<div class="m-t-xs font-bold">Graphics designer</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<h3><strong>John Smith</strong></h3>
+						<p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+						<address>
+							<strong>Twitter, Inc.</strong><br>
+							795 Folsom Ave, Suite 600<br>
+							San Francisco, CA 94107<br>
+							<abbr title="Phone">P:</abbr> (123) 456-7890
+						</address>
+					</div>
+					<div class="clearfix"></div>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="contact-box">
+				<a href="profile.html">
+					<div class="col-sm-4">
+						<div class="text-center">
+							<img alt="image" class="img-circle m-t-xs img-responsive" src="img/a1.jpg">
+							<div class="m-t-xs font-bold">CEO</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<h3><strong>Alex Johnatan</strong></h3>
+						<p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+						<address>
+							<strong>Twitter, Inc.</strong><br>
+							795 Folsom Ave, Suite 600<br>
+							San Francisco, CA 94107<br>
+							<abbr title="Phone">P:</abbr> (123) 456-7890
+						</address>
+					</div>
+					<div class="clearfix"></div>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="contact-box">
+				<a href="profile.html">
+					<div class="col-sm-4">
+						<div class="text-center">
+							<img alt="image" class="img-circle m-t-xs img-responsive" src="img/a3.jpg">
+							<div class="m-t-xs font-bold">Marketing manager</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<h3><strong>Monica Smith</strong></h3>
+						<p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+						<address>
+							<strong>Twitter, Inc.</strong><br>
+							795 Folsom Ave, Suite 600<br>
+							San Francisco, CA 94107<br>
+							<abbr title="Phone">P:</abbr> (123) 456-7890
+						</address>
+					</div>
+					<div class="clearfix"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+-->

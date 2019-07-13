@@ -1,0 +1,22 @@
+<div class="btn-group" *ngIf="_data.pages.length > 1">
+	<button [ngClass]="{disabled: _data.currentPage <= 1}" (click)="setPage(_data.currentPage - 1)" type="button"
+		class="btn btn-white btn-sm" title="Previous Page">
+		<i class="fa fa-arrow-left"></i>
+	</button>
+
+	<ng-container *ngIf="!simpleView">
+		<button *ngIf="_data.currentPage > 10" (click)="setPage(1)" title="First Page"
+			class="btn btn-white btn-sm">...</button>
+
+		<button *ngFor="let page of _data.pages" [ngClass]="{active: page === _data.currentPage}"
+			(click)="setPage(page)" [title]="'Page ' + page" class="btn btn-white btn-sm">{{ page }}</button>
+
+		<button *ngIf="_data.currentPage < _data.totalPages && _data.currentPage > 9"
+			(click)="setPage(_data.totalPages)" title="Last Page" class="btn btn-white btn-sm">...</button>
+	</ng-container>
+
+	<button [ngClass]="{disabled: _data.currentPage === _data.totalPages}" (click)="setPage(_data.currentPage + 1)"
+		type="button" class="btn btn-white btn-sm" title="Next Page">
+		<i class="fa fa-arrow-right"></i>
+	</button>
+</div>

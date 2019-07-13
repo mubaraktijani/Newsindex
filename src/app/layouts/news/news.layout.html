@@ -1,0 +1,22 @@
+<table class="table table-hover table-mail" *ngIf="data.length">
+	<tbody>
+		<tr *ngFor="let row of data; let i = index" [ngClass]="(row.state) ? 'unread' : 'read'">
+			<td class="check-mail">
+				<input iCheck [value]="row.state" [class.checked]="row.state" [checked]="row.state"
+					(ifChanged)="select($event, i)" type="checkbox">
+			</td>
+			<td class="mail-ontact">
+				<a [routerLink]="['/news', row.news_id]" [title]="row.channel_name">
+					{{ row.channel_name }}
+				</a>
+				<span class="label label-primary pull-right">{{ row.category_name }}</span>
+			</td>
+			<td class="mail-subject">
+				<a [innerHTML]="row.title" [routerLink]="['/news', row.news_id]" data-placement="bottom"
+					class="tooltips" [title]="row.description"></a>
+			</td>
+			<td class=""></td>
+			<td class="text-right mail-date" width="130px">{{ row.news_date | date :  "EEE dd MMM, y" }}</td>
+		</tr>
+	</tbody>
+</table>

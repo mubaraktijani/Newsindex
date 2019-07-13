@@ -1,0 +1,112 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-success pull-right">Today</span>
+					<h5>Alerts</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{user.alerts}}</h1>
+					<!--<div class="stat-percent font-bold text-success">98%
+						<i class="fa fa-bolt"></i>
+					</div>-->
+					<small>Today alerts</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-info pull-right">Total</span>
+					<h5>Bookmark</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{user.bookmarks}}</h1>
+					<!--<div class="stat-percent font-bold text-info">20%
+						<i class="fa fa-level-up"></i>
+					</div>-->
+					<small>All your Bookmarks</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">Today</span>
+					<h5>visits</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{user.viewed}}</h1>
+					<!--<div class="stat-percent font-bold text-navy">44%
+						<i class="fa fa-level-up"></i>
+					</div>-->
+					<small>New visits</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-danger pull-right">Today</span>
+					<h5>Subscriptions</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{0 + user.subscribed_blogs + user.subscribed_categories + user.subscribed_writers}}</h1>
+					<!--<div class="stat-percent font-bold text-danger">38%
+						<i class="fa fa-level-down"></i>
+					</div>-->
+					<small>New Subscription news</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">Tag Cloud</span>
+					<h5>Organisations</h5>
+				</div>
+				<div class="ibox-content">
+					<h2 class="text-muted text-center p-h-xl" *ngIf="!tagCoud.organization || tagCoud.organization && !tagCoud.organization.length">No
+						Content Available!</h2>
+					<div jQWCloud [data]="tagCoud.organization" (ifClicked)="viewTag($event)" *ngIf="tagCoud.organization && tagCoud.organization.length"
+					 style="width:100%;height:300px;overflow-x:auto;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">Tag Cloud</span>
+					<h5>Peoples</h5>
+				</div>
+				<div class="ibox-content">
+					<h2 class="text-muted text-center p-h-xl" *ngIf="!tagCoud.person || tagCoud.person && !tagCoud.person.length">No
+						Content Available!</h2>
+					<div jQWCloud [data]="tagCoud.person" (ifClicked)="viewTag($event)" *ngIf="tagCoud.person && tagCoud.person.length"
+					 style="width:100%;height:300px;overflow-x:auto;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">Tag Cloud</span>
+					<h5>Others</h5>
+				</div>
+				<div class="ibox-content">
+					<h2 class="text-muted text-center p-h-xl" *ngIf="!tagCoud.others || tagCoud.others && !tagCoud.others.length">No
+						Content Available!</h2>
+					<div jQWCloud [data]="tagCoud.others" (ifClicked)="viewTag($event)" *ngIf="tagCoud.others && tagCoud.others.length"
+					 style="width:100%;height:200px;overflow-x:auto;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

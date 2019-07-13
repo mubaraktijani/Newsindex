@@ -1,0 +1,28 @@
+.ibox-content.sk-loading:after {
+	z-index: 1000;
+}
+
+#toast-container>.toast:before {
+	content: "" !important;
+}
+
+.scroll {
+	overflow-y: auto;
+	max-height: 350px;
+}
+
+.chosen-container.form-control {
+	padding: 0px !important;
+}
+
+.chosen-container.form-control .chosen-single {
+	border: 0px !important;
+}
+
+/* Only demo */
+
+@media (max-width: 1000px) {
+	.welcome-message {
+		display: none;
+	}
+}

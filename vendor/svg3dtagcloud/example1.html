@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset='utf-8'>
+    <title>SVG3DTagCloud - Example 1</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src='js/jquery.svg3dtagcloud.min.js'></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <style type='text/css'>
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, font, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: #000;
+        }
+
+    </style>
+
+    <script>
+
+    	$( document ).ready( function() {
+
+            var entries = [ 
+                
+                { label: 'Dev Blog', url: 'http://niklasknaack.blogspot.de/' },
+                { label: 'Flashforum', url: 'http://www.flashforum.de/' },
+                { label: 'jQueryScript.net', url: 'http://www.jqueryscript.net/' },
+                { label: 'Javascript-Forum', url: 'http://forum.jswelt.de/' },
+                { label: 'JSFiddle', url: 'https://jsfiddle.net/user/NiklasKnaack/fiddles/' },
+                { label: 'CodePen', url: 'http://codepen.io/' },
+                { label: 'three.js', url: 'http://threejs.org/' },
+                { label: 'WebGLStudio.js', url: 'http://webglstudio.org/' },
+                { label: 'JS Compress', url: 'http://jscompress.com/' },
+                { label: 'TinyPNG', url: 'https://tinypng.com/' },
+                { label: 'Can I Use', url: 'http://caniuse.com/' },
+                { label: 'URL shortener', url: 'https://goo.gl/' },
+                { label: 'HTML Encoder', url: 'http://www.opinionatedgeek.com/DotNet/Tools/HTMLEncode/Encode.aspx' },
+                { label: 'Twitter', url: 'https://twitter.com/niklaswebdev' },
+                { label: 'deviantART', url: 'http://nkunited.deviantart.com/' },
+                { label: 'Gulp', url: 'http://gulpjs.com/' },
+                { label: 'Browsersync', url: 'https://www.browsersync.io/' },
+                { label: 'GitHub', url: 'https://github.com/' },
+                { label: 'Shadertoy', url: 'https://www.shadertoy.com/' },
+                { label: 'Starling', url: 'http://gamua.com/starling/' },
+                { label: 'jsPerf', url: 'http://jsperf.com/' },
+                { label: 'Foundation', url: 'http://foundation.zurb.com/' },
+                { label: 'CreateJS', url: 'http://createjs.com/' },
+                { label: 'Velocity.js', url: 'http://julian.com/research/velocity/' },
+                { label: 'TweenLite', url: 'https://greensock.com/docs/#/HTML5/GSAP/TweenLite/' },
+                { label: 'jQuery', url: 'https://jquery.com/' },
+                { label: 'jQuery Rain', url: 'http://www.jqueryrain.com/' },
+                { label: 'jQuery Plugins', url: 'http://jquery-plugins.net/' },
+
+            ];
+
+            var settings = {
+
+                entries: entries,
+                width: 480,
+                height: 480,
+                radius: '65%',
+                radiusMin: 75,
+                bgDraw: true,
+                bgColor: '#111',
+                opacityOver: 1.00,
+                opacityOut: 0.05,
+                opacitySpeed: 6,
+                fov: 800,
+                speed: 0,
+                fontFamily: 'Oswald, Arial, sans-serif',
+                fontSize: '15',
+                fontColor: '#fff',
+                fontWeight: 'normal',//bold
+                fontStyle: 'normal',//italic 
+                fontStretch: 'normal',//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
+                fontToUpperCase: true,
+                tooltipFontFamily: 'Oswald, Arial, sans-serif',
+                tooltipFontSize: '11',
+                tooltipFontColor: '#fff',
+                tooltipFontWeight: 'normal',//bold
+                tooltipFontStyle: 'normal',//italic 
+                tooltipFontStretch: 'normal',//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
+                tooltipFontToUpperCase: false,
+                tooltipTextAnchor: 'left',
+                tooltipDiffX: 0,
+                tooltipDiffY: 10
+
+            };
+
+            //var svg3DTagCloud = new SVG3DTagCloud( document.getElementById( 'holder'  ), settings );
+            $( '#holder' ).svg3DTagCloud( settings );
+
+		} );
+        
+    </script>
+
+</head>
+
+<body>
+
+    <div id='holder'></div>
+
+</body>

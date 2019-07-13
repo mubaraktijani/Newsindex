@@ -1,0 +1,85 @@
+<app-pageHeader-layout [name]="title" [breadcrumb]="page_header_breadcrumb" [href]="href"></app-pageHeader-layout>
+
+<div class="wrapper wrapper-content animated slideIn">
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+				<div class="ibox-content" [ngClass]="{'sk-loading': isLoading}">
+					<app-loading-layout class="sk-spinner" [visibility]="isLoading"></app-loading-layout>
+
+					<app-tab-layout>
+
+						<app-tab-content-layout *ngFor="let tab of tabs; let i = index" [icon]="tab.icon"
+							[title]="tab.name" [active]="tab.active">
+							<app-settingsSubscribe-layout [title]="tab.title" [modalTitle]="tab.modalTitle"
+								[modalDesc]="tab.modalDesc" [desc]="tab.desc" [data]="tab.data" [type]="i + 1"
+								[editable]="tab.editable" [ngContent]="tab.ngContent"
+								(modalOnSaveEvent)="tab.modalOnSaveEvent($event)"
+								(onDeleteEvent)="tab.onDeleteEvent($event)">
+								<ng-container *ngIf="tab.ngContent && i === 3">
+									<form [formGroup]="alertForm">
+										<table class="table no-margins">
+											<tr>
+												<td class="no-borders">
+													<input type="text" class="form-control"
+														placeholder="Create an alert About.."
+														formControlName="alert_title">
+												</td>
+												<td class="no-borders">
+													<select select2 class="form-control" formControlName="alert_source">
+														<option selected="selected" value="1">Blogs</option>
+														<option value="2">My Subscriptions</option>
+													</select>
+												</td>
+												<td class="no-borders">
+													<label class="m-b-none" style="position: relative;">
+														<input type="checkbox" [value]="1" [checked]="true"
+															formControlName="alert_title_filter" /> in
+														title only
+													</label>
+												</td>
+											</tr>
+										</table>
+									</form>
+								</ng-container>
+
+								<ng-container *ngIf="tab.ngContent && i === 4">
+									<form [formGroup]="bookmarkForm">
+										<table class="table no-margins">
+											<tr>
+												<td class="no-borders">
+													<input type="text" class="form-control"
+														placeholder="Create new Bookmark.." formControlName="name">
+												</td>
+											</tr>
+										</table>
+									</form>
+								</ng-container>
+							</app-settingsSubscribe-layout>
+						</app-tab-content-layout>
+
+						<!--
+						<app-tab-content-layout [icon]="'fa-cog'" [title]="'Configuration'" [active]="false">
+							<div class="table-responsive">
+								<table class="table table-hover issue-tracker">
+									<tr>
+										<td class="issue-info">
+											<a class="font-normal text-capitalize" href="javascript:;">
+												Hello
+											</a>
+										</td>
+										<td class="issue-info">
+											<input iCheck type="checkbox">
+										</td>
+									</tr>
+								</table>
+							</div>
+						</app-tab-content-layout>
+					-->
+					</app-tab-layout>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

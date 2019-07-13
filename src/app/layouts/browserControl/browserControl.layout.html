@@ -1,0 +1,66 @@
+<ng-container *ngFor="let control of controlMenu; let i = index">
+	<div class="mail-tools tooltip-demo m-b-xs clearfix"
+		*ngIf="control && control.showAsAction && control.showAsFullWidth && control.values">
+		<div class="text-center">
+			<button type="button" class="btn btn-outline btn-sm" *ngFor="let action of control.values; let ii = index"
+				[ngClass]="{'active': selectedAction[control.group] === action}"
+				(click)="setSelectedAction(i, ii)">{{action}}</button>
+		</div>
+	</div>
+</ng-container>
+
+<div class="mail-tools tooltip-demo m-b-xs clearfix">
+	<div class="pull-right" *ngIf="pagination !== undefined && pagination.total">
+		Showing {{pagination.from}} to {{pagination.to}} of {{pagination.total}} entries
+		<app-pagination-layout [data]="pagination" [simpleView]="true" (onPageChanged)="setPage($event)">
+		</app-pagination-layout>
+	</div>
+	<div class="pull-left">
+
+		<ng-container *ngIf="data !== undefined && data.length">
+			<button class="btn btn-white btn-sm m-r-xs" data-toggle="tooltip" (click)="selectAll()"
+				data-placement="left" title="Mark All">
+				<i class="fa" [ngClass]="(this.isAllSelected) ? 'fa-times' : 'fa-check'"></i> Mark All
+			</button>
+		</ng-container>
+
+		<ng-container *ngFor="let control of controlMenu; let i = index">
+			<ng-container *ngIf="control && control.values && control.showAsAction && !control.showAsFullWidth">
+				<div class="btn-group btn-group-sm m-r-xs">
+					<button data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+						<i class="fa" *ngIf="control.icon" [ngClass]="control.icon"></i> {{ control.name }}
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<ng-container *ngFor="let controlRow of control.values; let ii = index">
+							<ng-container
+								*ngIf="controlRow.hasOwnProperty('group') && controlRow.hasOwnProperty('name') && controlRow.hasOwnProperty('value')">
+								<li
+									[ngClass]="(!controlRow.hasOwnProperty('name')) ? 'divider' : {'active': selectedAction[controlRow.group] === controlRow.value}">
+									<a href="javascript:;" class="btn-sm" (click)="setSelectedAction(i, ii)">
+										{{controlRow.name}}
+									</a>
+								</li>
+							</ng-container>
+						</ng-container>
+					</ul>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="control && !control.showAsAction && !control.showAsFullWidth">
+				<button class="btn btn-sm m-r-xs" [class.btn-primary]="control.selected"
+					[class.btn-white]="!control.selected" data-toggle="tooltip" (click)="setSelectedAction(i)"
+					data-placement="left" [title]="control.name">
+					<i class="fa" *ngIf="control.icon" [ngClass]="control.icon"></i>
+					<span *ngIf="!control.iconOnly"> {{ control.name }}</span>
+				</button>
+			</ng-container>
+		</ng-container>
+
+		<button class="btn btn-white btn-sm m-r-xs" data-toggle="tooltip" (click)="refresh()" data-placement="left"
+			title="Refresh">
+			<i class="fa fa-refresh"></i> Refresh
+		</button>
+
+	</div>
+
+</div>

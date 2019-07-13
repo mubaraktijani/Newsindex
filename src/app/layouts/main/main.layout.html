@@ -1,0 +1,23 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+	<!-- Left navigation bar -->
+	<app-navigation-layout (onLogout)="logout()"></app-navigation-layout>
+
+	<!-- Main page wrapper -->
+	<div id="page-wrapper" class="gray-bg">
+
+		<!-- Top navigation -->
+		<app-topnavbar-layout (onLogout)="logout()"></app-topnavbar-layout>
+
+		<!-- Main view/routes wrapper-->
+		<router-outlet></router-outlet>
+
+		<!-- Footer -->
+		<app-footer-layout></app-footer-layout>
+
+	</div>
+	<!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
