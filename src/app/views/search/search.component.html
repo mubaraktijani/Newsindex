@@ -14,72 +14,76 @@
 							<form [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
 								<div class="row m-b-sm">
 									<div class="col-xs-4 col-sm-3">
-										<select select2 class="form-control input-sm" [search]="true" [placeholder]="'Filter by Blog'"
-										 formControlName="filter_blog">
-											<option [value]="0" [selected]="true">Blog: All</option>
-											<option *ngFor="let option of result.blogs" [value]="option.id">
-												{{ option.name }}
-											</option>
-										</select>
+										<select2 [data]="result.blogs" [width]="'100%'"
+											class="form-control input-sm no-paddings"
+											(valueChanged)="changeCity($event, 0)">
+										</select2>
 									</div>
 
 									<div class="col-xs-4 col-sm-3">
-										<select select2 class="form-control input-sm" [search]="true" [placeholder]="'Filter by Category'"
-										 formControlName="filter_category">
-											<option [value]="0" selected="selected">Category: All</option>
-											<option *ngFor="let option of result.categories" [value]="option.id">
-												{{ option.name }}
-											</option>
-										</select>
+										<select2 [data]="result.categories" [width]="'100%'"
+											class="form-control input-sm no-paddings"
+											(valueChanged)="changeCity($event, 1)">
+										</select2>
 									</div>
 
 									<div class="col-xs-4 col-sm-4">
-										<div datepicker class="input-daterange input-group" datepicker>
-											<input type="text" formControlName="filter_date_from" placeholder="Filter From date" class="form-control input-sm">
-											<span class="input-group-addon">to</span>
-											<input type="text" formControlName="filter_date_to" placeholder="Filter to date" class="form-control input-sm" />
+										<div style="width: 100%;" class="input-daterange input-group">
+											<my-date-picker (dateChanged)="changeCity($event, 2)" name="mydate"
+												[options]="myDatePickerOptions" [placeholder]="'Filter From date'"
+												class="form-control input-sm no-padding">
+											</my-date-picker>
+											<span class="input-group-addon" style="width: 30px;">to</span>
+											<my-date-picker (dateChanged)="changeCity($event, 3)" name="mydate"
+												[options]="myDatePickerOptions" [placeholder]="'Filter to date'"
+												class="form-control input-sm no-padding">
+											</my-date-picker>
 										</div>
 									</div>
 								</div>
 
-								<div formArrayName="searchRows" *ngIf="searchForm.value.filter_tag === 0 || searchForm.value.filter_tag === '0'">
-									<div class='row m-b-sm' *ngFor="let search_row of searchForm.controls.searchRows.controls; let i=index"
-									 [formGroupName]="i">
+
+								<div formArrayName="searchRows"
+									*ngIf="searchForm.value.filter_tag === 0 || searchForm.value.filter_tag === '0'">
+									<div class='row m-b-sm'
+										*ngFor="let search_row of searchForm.controls.searchRows.controls; let i=index"
+										[formGroupName]="i">
 
 										<div class="col-xs-3 col-sm-2" *ngIf="i !== 0">
-											<select select2 class="input-sm" formControlName="filter_operator">
-												<option [value]="1" [selected]="true">AND</option>
-												<option [value]="2">OR</option>
-												<option [value]="3">NOT</option>
-											</select>
+											<select2 [data]="filter_operator" [width]="'100%'"
+												class="form-control input-sm no-paddings"
+												(valueChanged)="changeCity($event, 4, i)">
+											</select2>
 										</div>
 
 										<div class="col-xs-3 col-sm-2">
-											<select select2 class="input-sm" formControlName="filter_type">
-												<option value="1" [selected]="true">Title</option>
-												<option value="2">Article</option>
-												<option value="3">Writer</option>
-												<option value="4">Title and Article</option>
-											</select>
+											<select2 [data]="filter_type" [width]="'100%'"
+												class="form-control input-sm no-paddings"
+												(valueChanged)="changeCity($event, 5, i)">
+											</select2>
 										</div>
 
 										<div class="" [ngClass]="(i < 1) ? 'col-xs-6 col-sm-8' : 'col-xs-4 col-sm-6'">
-											<input type="text" class="form-control input-sm" formControlName="filter" placeholder="Search term">
+											<input type="text" class="form-control input-sm" formControlName="filter"
+												placeholder="Search term">
 										</div>
 
 										<div class="col-xs-2 col-sm-2">
-											<button *ngIf="searchForm.controls.searchRows.controls.length > 1" (click)="deleteFilter(i)" title="Remove"
-											 class="btn btn-danger btn-sm m-r-xs" type="button">
+											<button *ngIf="searchForm.controls.searchRows.controls.length > 1"
+												(click)="deleteFilter(i)" title="Remove"
+												class="btn btn-danger btn-sm m-r-xs" type="button">
 												<span aria-hidden="true" class="fa fa-minus"></span>
 											</button>
-											<button (click)="addFilter()" title="add " class="btn btn-primary btn-sm m-r-xs" type="button">
+											<button (click)="addFilter()" title="add "
+												class="btn btn-primary btn-sm m-r-xs" type="button">
 												<span aria-hidden="true" class="fa fa-plus"></span>
 											</button>
 										</div>
 									</div>
 								</div>
 
-								<button type="button" class="btn btn-white btn-sm m-r-xs" (click)="initSearchForm()">Reset</button>
+								<button type="button" class="btn btn-white btn-sm m-r-xs"
+									(click)="initSearchForm()">Reset</button>
 								<button class="btn btn-primary btn-sm m-r-xs" type="submit">Apply</button>
 
 							</form>
@@ -88,8 +92,8 @@
 						<ng-container *ngIf="result.data.data">
 							<div class="hr-line-dashed"></div>
 
-							<app-browserControl-layout [data]="result.data.data" [pagination]="result.data" [controlMenu]="controlMenu"
-							 (onControlItemClicked)="loadSearchResult($event)">
+							<app-browserControl-layout [data]="result.data.data" [pagination]="result.data"
+								[controlMenu]="controlMenu" (onControlItemClicked)="loadSearchResult($event)">
 							</app-browserControl-layout>
 						</ng-container>
 

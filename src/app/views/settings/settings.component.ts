@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageHeaderBreadcrumb } from '../../layouts/pageHeader/pageHeader.layout';
 import { detectBody } from '../../app.helpers';
 import { SettingsService } from '../../services/settings.service';
-import { App } from '../../app.config';
+import { App, Config } from '../../app.config';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import { Auth } from 'src/app/helpers/auth.helper';
@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
 				this.settings = response;
 				for (let index = 0; index < this.settings.bookmarks.browse.length; index++) {
 					const element = this.settings.bookmarks.browse[index];
-					element.hint = 'https://localhost/project/newsindex/api/rss/' + this.user.id + '/' + element.slug;
+					element.hint = Config.URL.rss + '/' + this.user.id + '/' + element.slug;
 				}
 				for (let index = 0; index < this.settings.alerts.browse.length; index++) {
 					const element = this.settings.alerts.browse[index];
@@ -77,7 +77,7 @@ export class SettingsComponent implements OnInit {
 				title: 'Subscribed Blogs',
 				desc: 'Subscribe to the Blogs you follow regularly',
 				modalTitle: 'Add New Blog',
-				modalDesc: 'string',
+				modalDesc: '',
 				data: blogs,
 				active: true,
 				editable: true
@@ -88,7 +88,7 @@ export class SettingsComponent implements OnInit {
 				title: 'Subscribed Categories',
 				desc: 'Subscribe to the Categories you follow regularly',
 				modalTitle: 'Add New Category',
-				modalDesc: 'string',
+				modalDesc: '',
 				data: categories,
 				editable: true
 			},
@@ -98,7 +98,7 @@ export class SettingsComponent implements OnInit {
 				title: 'Subscribed Writers',
 				desc: 'Subscribe to the Writers you follow regularly',
 				modalTitle: 'Add New Writer',
-				modalDesc: 'string',
+				modalDesc: '',
 				data: writers,
 			},
 			{
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit {
 				title: 'My Alerts',
 				desc: 'Monitor the web for interesting new content',
 				modalTitle: 'Add New Alert',
-				modalDesc: 'string',
+				modalDesc: '',
 				data: alerts,
 				ngContent: true,
 				modalOnSaveEvent: () => this.saveAlert(),
@@ -119,7 +119,7 @@ export class SettingsComponent implements OnInit {
 				title: 'My Bookmarks',
 				desc: 'Create Bookmark categories like <b>important</b>, <b>Fake</b>...',
 				modalTitle: 'Add New Bookmark',
-				modalDesc: 'string',
+				modalDesc: '',
 				data: bookmarks,
 				ngContent: true,
 				modalOnSaveEvent: () => this.saveBookmark(),

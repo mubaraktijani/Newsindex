@@ -4,6 +4,9 @@ import { PageHeaderBreadcrumb } from '../../layouts/pageHeader/pageHeader.layout
 import { SearchService } from '../../services/search.service';
 import { App } from '../../app.config';
 import { ControlMenu } from '../../layouts/browserControl/browserControl.layout';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Select2OptionData } from 'ng2-select2';
+import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
 	selector: 'app-search',
@@ -19,18 +22,84 @@ export class SearchComponent implements OnInit {
 	controlMenu: Array<ControlMenu> = [];
 	page_header_breadcrumb: Array<PageHeaderBreadcrumb> = [{ title: this.title, router: 'search' }];
 
-	constructor(private formBuilder: FormBuilder, private service: SearchService) {
+	public myDatePickerOptions: IMyDpOptions = {
+		inline: false,
+		dateFormat: 'dd/mm/yyyy',
+		height: '100%',
+		selectionTxtFontSize: 'inherit',
+		editableDateField: false,
+		showInputField: true,
+		showSelectorArrow: false,
+		openSelectorOnInputClick: true,
+	};
+
+	public filter_operator: Array<Select2OptionData>;
+	public filter_type: Array<Select2OptionData>;
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private route: ActivatedRoute,
+		private router: Router,
+		private service: SearchService) {
 		this.result.blogs = this.result.categories = this.result.data = [];
 	}
 
 	ngOnInit() {
 		this.initSearchForm(this.searchForm);
 
+		this.filter_operator = [
+			{
+				id: '1',
+				text: 'AND',
+			},
+			{
+				id: '2',
+				text: 'OR'
+			},
+			{
+				id: '3',
+				text: 'NOT'
+			}
+		];
+
+		this.result.blogs = [
+			{
+				id: '0',
+				text: 'Blog: All'
+			}
+		];
+		this.result.categories = [
+			{
+				id: '0',
+				text: 'Category: All'
+			}
+		];
+
+		this.filter_type = [
+			{
+				id: '1',
+				text: 'Title'
+			},
+			{
+				id: '2',
+				text: 'Article'
+			},
+			{
+				id: '3',
+				text: 'Writer'
+			},
+			{
+				id: '4',
+				text: 'Title and Article'
+			}
+		];
+
 		this.isLoading = true;
 		this.service.init().subscribe(
 			response => {
-				this.result.blogs = response.blogs;
-				this.result.categories = response.categories;
+				this.result.blogs = this.result.blogs.concat(response.blogs);
+				this.result.categories = this.result.categories.concat(response.categories);
+
 				this.isLoading = false;
 			},
 			error => {
@@ -38,6 +107,8 @@ export class SearchComponent implements OnInit {
 				this.isLoading = false;
 			}
 		);
+
+		this.loadSearchResult();
 	}
 
 	initSearchForm(form?: FormGroup): void {
@@ -73,45 +144,63 @@ export class SearchComponent implements OnInit {
 		control.removeAt(index);
 	}
 
+	changeCity(e, index, x = 0) {
+		switch (index) {
+			case 0:
+				this.searchForm.controls['filter_blog'].setValue(e.value);
+				break;
+			case 1:
+				this.searchForm.controls['filter_category'].setValue(e.value);
+				break;
+			case 2:
+				this.searchForm.controls['filter_date_from'].setValue(e.formatted);
+				break;
+			case 3:
+				this.searchForm.controls['filter_date_to'].setValue(e.formatted);
+				break;
+			case 4:
+				this.searchForm.controls['searchRows']
+					.controls[x]
+					.controls['filter_type']
+					.setValue(e.value);
+				break;
+			case 5:
+				this.searchForm.controls['searchRows']
+					.controls[x]
+					.controls['filter_operator']
+					.setValue(e.value);
+				break;
+		}
+	}
+
 	onSearch(form: FormGroup): void {
-		this.searchFormData = new FormData();
-
-		this.searchFormData.append('filter_blog', form.value.filter_blog);
-		this.searchFormData.append('filter_category', form.value.filter_category);
-		this.searchFormData.append('filter_tag', form.value.filter_tag);
-
-		this.searchFormData.append('filter_date_from', form.value.filter_date_from);
-		this.searchFormData.append('filter_date_to', form.value.filter_date_to);
-
-		form.value.searchRows.forEach(searchRow => {
-			this.searchFormData.append('filter[]', searchRow.filter);
-			this.searchFormData.append('filter_type[]', searchRow.filter_type);
-			this.searchFormData.append('filter_operator[]', searchRow.filter_operator);
-		});
-
-		this.loadSearchResult();
+		return this.loadSearchResult(this.searchForm.value);
 	}
 
 	loadSearchResult(options?: any) {
 
 		this.isLoading = true;
 
-		const params = (typeof options === 'object') ? options : {};
-		console.log(params);
+		const params: object = (typeof options === 'object') ? options : {};
+		const queryParams = this.route.queryParams;
 
-		if (typeof options === 'object') {
-			for (const key in options) {
-				if (options.hasOwnProperty(key)) {
-					this.searchFormData.set(key, options[key]);
-				}
+		queryParams.subscribe(qParam => {
+			if (typeof options === 'object' && options['page'] !== 'undefined') {
+				this.router.navigate([], { queryParams: { page: options['page'] } });
+			} else {
+				Object.keys(qParam).forEach(qParamKey => {
+					params[qParamKey] = qParam[qParamKey];
+				});
 			}
-		}
+		});
 
-		this.service.search(this.searchFormData).subscribe(
+		this.service.search(params).subscribe(
 			response => {
-				App.__success(response);
-				if (response.hasOwnProperty('data')) {
-					this.result.data = response.data;
+				if (response !== null) {
+					App.__success(response);
+					if (response.hasOwnProperty('data')) {
+						this.result.data = response.data;
+					}
 				}
 				this.isLoading = false;
 			},

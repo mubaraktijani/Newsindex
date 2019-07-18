@@ -1,3 +1,4 @@
+import { MyDatePickerModule } from 'mydatepicker';
 import { LayoutsModule } from './../layouts/layouts.module';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +20,10 @@ import { SparklineModule } from './../directives/charts/sparkline';
 import { JVectorMapModule } from './../directives/maps/jvectorMap';
 import { ICheckModule } from 'src/app/directives/icheck.directive';
 import { ChosenModule } from 'src/app/directives/chosen.directive';
-import { Select2Module } from '../directives/select2.directive';
+
+import { Select2Module } from 'ng2-select2';
+
+import { AppSelect2Module } from '../directives/select2.directive';
 import { DatepickerModule } from 'src/app/directives/datepicker.directive';
 import { JQWCloudModule } from 'src/app/directives/jqwcloud.directive';
 import { SVG3DTagCloudModule } from 'src/app/directives/svg3dtagcloud.directive';
@@ -84,7 +88,11 @@ import { UsersComponent } from './users/users.component';
 		JVectorMapModule,
 		ICheckModule,
 		ChosenModule,
+
 		Select2Module,
+		MyDatePickerModule,
+
+		// AppSelect2Module,
 		DatepickerModule,
 		JQWCloudModule,
 		SVG3DTagCloudModule,

@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, NgModule, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, NgModule, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import './../../../vendor/select2/select2.full.js';
 
 declare var jQuery: any;
@@ -8,7 +8,7 @@ declare var jQuery: any;
 	selector: 'select[select2]'
 })
 
-export class Select2Directive implements OnInit {
+export class Select2Directive implements OnInit, OnChanges {
 
 	@Input() private placeholder = '';
 	@Input() private search = false;
@@ -31,6 +31,10 @@ export class Select2Directive implements OnInit {
 		jQuery(this.el.nativeElement).select2(this.options);
 	}
 
+	ngOnChanges(changes: SimpleChanges) {
+		jQuery(this.el.nativeElement).select2(this.options);
+	}
+
 }
 
 @NgModule({
@@ -43,4 +47,4 @@ export class Select2Directive implements OnInit {
 	imports: []
 })
 
-export class Select2Module { }
+export class AppSelect2Module { }

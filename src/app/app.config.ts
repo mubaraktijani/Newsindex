@@ -20,6 +20,8 @@ export class Config {
 	static AUTH_HEADER_KEY = 'Authorization';
 	static AUTH_HEADER_PREFIX = 'Bearer';
 
+	static SEARCH_RESULT_KEY = 'sphinx_results';
+
 	static WHITE_LIST_DOMAINS = [
 		'newsindex.ng',
 		'api.newsindex.ng',
@@ -57,6 +59,8 @@ export class Config {
 
 		search: base_url + '/search',
 		settings: base_url + '/settings',
+
+		rss: base_url + '/rss'
 	};
 }
 
@@ -67,18 +71,23 @@ export class App {
 	}
 
 	static __success(response: any): void {
-		let isMessageShown = false;
-		const title = Config.SUCCESS_TITLE;
+		if (response !== null) {
+			let isMessageShown = false;
+			const title = Config.SUCCESS_TITLE;
 
-		['success', 'message', 'msg', 'data', 'warning'].forEach((prefix) => {
-			if (!isMessageShown && response[prefix]) {
-				Toastr.success(response[prefix], title);
-				isMessageShown = true;
-			} else if (!isMessageShown && typeof response === 'string') {
-				Toastr.success(response, title);
-				isMessageShown = true;
-			}
-		});
+			['success', 'message', 'msg', 'data', 'warning'].forEach((prefix) => {
+				if (!isMessageShown && response[prefix]) {
+					// Toastr.success(response[prefix], title);
+					if (response[prefix].length > 0) {
+						Toastr.success(response[prefix]);
+					}
+					isMessageShown = true;
+				} else if (!isMessageShown && typeof response === 'string') {
+					Toastr.success(response, title);
+					isMessageShown = true;
+				}
+			});
+		}
 	}
 
 	static __error(httpError: HttpErrorResponse | string): void {
