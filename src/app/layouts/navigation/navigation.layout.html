@@ -3,7 +3,8 @@
 		<ul class="nav metismenu" id="side-menu">
 			<li class="nav-header">
 				<div class="profile-element" dropdown>
-					<img alt="image" class="img-circle" src="assets/images/profile_small.jpg">
+					<!--<img alt="image" class="img-circle" src="assets/images/profile_small.jpg">-->
+					<div class="img-circle avatar">{{ user.name.charAt(0) }}</div>
 					<a dropdownToggle>
 						<span class="block m-t-xs">
 							<strong class="font-bold">{{ user.name }}</strong>
@@ -80,12 +81,14 @@
 						<a routerLink="/blogs">Browse</a>
 					</li>
 					<li [ngClass]="{active: activeRoute(['blogs', this.routeParam[1], 'categories' ])}">
-						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'" [routerLink]="'/blogs/' + this.routeParam[1] + '/categories'">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'"
+							[routerLink]="'/blogs/' + this.routeParam[1] + '/categories'">
 							By Category
 						</a>
 					</li>
 					<li [ngClass]="{active: activeRoute(['blogs', this.routeParam[1], 'writers' ])}">
-						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'" [routerLink]="'/blogs/' + this.routeParam[1] + '/writers'">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'blogs'"
+							[routerLink]="'/blogs/' + this.routeParam[1] + '/writers'">
 							By Writers
 						</a>
 					</li>
@@ -103,12 +106,14 @@
 						<a routerLink="/categories">Browse</a>
 					</li>
 					<li [ngClass]="{active: activeRoute(['categories', this.routeParam[1], 'blogs' ])}">
-						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'" [routerLink]="'/categories/' + this.routeParam[1] + '/blogs'">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'"
+							[routerLink]="'/categories/' + this.routeParam[1] + '/blogs'">
 							By Blogs
 						</a>
 					</li>
 					<li [ngClass]="{active: activeRoute('permissions')}">
-						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'" [routerLink]="'/categories/' + this.routeParam[1] + '/writers'">
+						<a *ngIf="this.routeParam.length > 1 && this.routeParam[0] === 'categories'"
+							[routerLink]="'/categories/' + this.routeParam[1] + '/writers'">
 							By Writers
 						</a>
 					</li>

@@ -3,10 +3,14 @@
 		<tbody>
 			<tr *ngFor="let row of data; let i = index">
 				<td class="issue-info">
-					<a class="font-normal text-capitalize" [routerLink]="(row.hasOwnProperty('slug')) ? [href, row.slug] : [href, row.id]"
-					 [title]="row.name">
+					<a class="font-normal text-capitalize"
+						[routerLink]="(row.hasOwnProperty('slug')) ? [href, row.slug] : [href, row.id]"
+						[title]="row.name">
 						{{ row.name }}
-						<span class="label label-primary" *ngIf="row.hasOwnProperty('today_count')">{{row.today_count}}</span>
+						<span class="label label-primary" *ngIf="row.hasOwnProperty('today_count')">n
+							{{row.today_count}}</span>
+						<span class="label label-success" *ngIf="row.hasOwnProperty('writer_count')">w
+							{{row.writer_count}}</span>
 					</a>
 				</td>
 			</tr>
@@ -15,8 +19,9 @@
 </ng-container>
 <ng-container *ngIf="viewType === 2">
 	<a *ngFor="let row of data; let i = index" class="btn btn-white btn-sm m-r-xs font-normal text-capitalize"
-	 [routerLink]="(row.hasOwnProperty('slug')) ? [href, row.slug] : [href, row.id]" [title]="row.name">
+		[routerLink]="(row.hasOwnProperty('slug')) ? [href, row.slug] : [href, row.id]" [title]="row.name">
 		{{ row.name }}
-		<span class="label label-primary" *ngIf="row.hasOwnProperty('today_count')">{{row.today_count}}</span>
+		<span class="label label-primary" *ngIf="row.hasOwnProperty('today_count')">n {{row.today_count}}</span>
+		<span class="label label-success" *ngIf="row.hasOwnProperty('writer_count')">w {{row.writer_count}}</span>
 	</a>
 </ng-container>

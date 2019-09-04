@@ -12,3 +12,17 @@
 /*@import "select2/select2.min.css";*/
 @import "datapicker/datepicker3.css";
 @import "iCheck/custom.css";
+
+
+.img-circle.avatar {
+	height: 50px;
+	width: 50px;
+	background: #c62828;
+	text-align: center;
+	color: white;
+	font-size: 30px;
+	line-height: 40px;
+	font-weight: normal;
+	text-transform: uppercase;
+	border: 3px solid #ad2524;
+}
