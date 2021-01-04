@@ -1,4 +1,4 @@
-import { MyDatePickerModule } from 'mydatepicker';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { LayoutsModule } from './../layouts/layouts.module';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 
 // https://alligator.io/angular/chartjs-ng2-charts/
 // Chart.js Angular 2 Directive by Valor Software (npm)
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { FlotChartModule } from './../directives/charts/flotChart';
 import { IboxtoolsModule } from './../layouts/iboxtools/iboxtools.layout';
@@ -21,7 +21,8 @@ import { JVectorMapModule } from './../directives/maps/jvectorMap';
 import { ICheckModule } from 'src/app/directives/icheck.directive';
 import { ChosenModule } from 'src/app/directives/chosen.directive';
 
-import { Select2Module } from 'ng2-select2';
+// import { Select2Module } from 'ng2-select2';
+import { NgSelect2Module } from 'ng-select2'
 
 import { AppSelect2Module } from '../directives/select2.directive';
 import { DatepickerModule } from 'src/app/directives/datepicker.directive';
@@ -80,7 +81,7 @@ import { UsersComponent } from './users/users.component';
 		BrowserAnimationsModule, // required animations module for [toastr, material.angular]
 		RouterModule,
 
-		ChartsModule,
+		// ChartsModule,
 		FlotChartModule,
 		IboxtoolsModule,
 		PeityModule,
@@ -89,8 +90,9 @@ import { UsersComponent } from './users/users.component';
 		ICheckModule,
 		ChosenModule,
 
-		Select2Module,
-		MyDatePickerModule,
+		// Select2Module,
+		NgSelect2Module,
+		AngularMyDatePickerModule,
 
 		// AppSelect2Module,
 		DatepickerModule,

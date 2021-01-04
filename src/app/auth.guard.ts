@@ -30,10 +30,10 @@ export class AuthGuard implements CanActivate {
 			error = 'Access Denied!';
 		}
 
-		if (isFirstVisit === undefined && state.url !== '/home') {
-			this.router.navigate(['/home']);
-			return false;
-		}
+		// if (isFirstVisit === undefined && state.url !== '/home') {
+		// 	this.router.navigate(['/auth/login']);
+		// 	return false;
+		// }
 
 		if (error !== undefined) { Toastr.error(error); }
 

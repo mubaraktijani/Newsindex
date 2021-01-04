@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import 'toastr';
+// import 'toastr';
 import { Auth } from 'src/app/helpers/auth.helper';
 import { Toastr } from 'src/app/helpers/toastr.helper';
 

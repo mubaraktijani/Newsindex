@@ -5,8 +5,8 @@ import { SearchService } from '../../services/search.service';
 import { App } from '../../app.config';
 import { ControlMenu } from '../../layouts/browserControl/browserControl.layout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Select2OptionData } from 'ng2-select2';
-import { IMyDpOptions } from 'mydatepicker';
+import { Select2OptionData } from 'ng-select2'
+import { IAngularMyDpOptions } from 'angular-mydatepicker';
 
 @Component({
 	selector: 'app-search',
@@ -22,15 +22,15 @@ export class SearchComponent implements OnInit {
 	controlMenu: Array<ControlMenu> = [];
 	page_header_breadcrumb: Array<PageHeaderBreadcrumb> = [{ title: this.title, router: 'search' }];
 
-	public myDatePickerOptions: IMyDpOptions = {
+	public myDatePickerOptions: IAngularMyDpOptions = {
 		inline: false,
 		dateFormat: 'dd/mm/yyyy',
-		height: '100%',
-		selectionTxtFontSize: 'inherit',
-		editableDateField: false,
-		showInputField: true,
+		// height: '100%',
+		// selectionTxtFontSize: 'inherit',
+		// editableDateField: false,
+		// showInputField: true,
 		showSelectorArrow: false,
-		openSelectorOnInputClick: true,
+		// openSelectorOnInputClick: true,
 	};
 
 	public filter_operator: Array<Select2OptionData>;

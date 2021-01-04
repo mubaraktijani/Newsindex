@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Config } from '../app.config';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 import { Auth } from 'src/app/helpers/auth.helper';
 
 @Injectable()
@@ -25,8 +23,8 @@ export class AuthService {
 
 	logout(): Observable<any> {
 		return this.http.get(Config.URL.logout)
-			.map((response: Response) => response)
-			.do(response => Auth.invalidate());
+			.map((response: Response) => response);
+		// .do(response => Auth.invalidate());
 	}
 
 	authorized(permission_key: string, permission_action: string = ''): boolean {

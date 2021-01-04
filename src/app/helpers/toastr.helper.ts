@@ -1,5 +1,5 @@
-import 'toastr';
-declare var toastr: any;
+import { ToastrService } from 'ngx-toastr';
+declare var toastr: ToastrService;
 
 export class Toastr {
 	static options = {
@@ -28,8 +28,7 @@ export class Toastr {
 
 	static error(message, title = null): void { toastr.error(message, title, Toastr.options); }
 
-	static remove() { toastr.remove(); }
+	// static remove() { toastr.remove(); }
 
 	static clear() { toastr.clear(); }
-
 }

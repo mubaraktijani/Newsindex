@@ -174,7 +174,7 @@ export class SettingsComponent implements OnInit {
 			response => {
 				form.reset();
 				const element = response.data;
-				element.hint = 'https://localhost/project/newsindex/api/rss/' + this.user.id + '/' + element.slug;
+				element.hint = Config.BOOKMARK_BASE_URL + this.user.uuid + '/' + element.slug;
 				this.settings.bookmarks.browse.push(element);
 				this.initTabs();
 				App.__success(response);

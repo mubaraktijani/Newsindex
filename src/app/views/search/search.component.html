@@ -14,30 +14,30 @@
 							<form [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
 								<div class="row m-b-sm">
 									<div class="col-xs-4 col-sm-3">
-										<select2 [data]="result.blogs" [width]="'100%'"
+										<ng-select2 [data]="result.blogs" [width]="'100%'"
 											class="form-control input-sm no-paddings"
 											(valueChanged)="changeCity($event, 0)">
-										</select2>
+										</ng-select2>
 									</div>
 
 									<div class="col-xs-4 col-sm-3">
-										<select2 [data]="result.categories" [width]="'100%'"
+										<ng-select2 [data]="result.categories" [width]="'100%'"
 											class="form-control input-sm no-paddings"
 											(valueChanged)="changeCity($event, 1)">
-										</select2>
+										</ng-select2>
 									</div>
 
 									<div class="col-xs-4 col-sm-4">
 										<div style="width: 100%;" class="input-daterange input-group">
-											<my-date-picker (dateChanged)="changeCity($event, 2)" name="mydate"
-												[options]="myDatePickerOptions" [placeholder]="'Filter From date'"
-												class="form-control input-sm no-padding">
-											</my-date-picker>
+											<input angular-mydatepicker name="mydate"
+												(dateChanged)="changeCity($event, 2)" [options]="myDatePickerOptions"
+												[placeholder]="'Filter From date'"
+												class="form-control input-sm no-padding" #dp="angular-mydatepicker">
 											<span class="input-group-addon" style="width: 30px;">to</span>
-											<my-date-picker (dateChanged)="changeCity($event, 3)" name="mydate"
-												[options]="myDatePickerOptions" [placeholder]="'Filter to date'"
-												class="form-control input-sm no-padding">
-											</my-date-picker>
+											<input angular-mydatepicker name="mydate"
+												(dateChanged)="changeCity($event, 3)" [options]="myDatePickerOptions"
+												[placeholder]="'Filter to date'"
+												class="form-control input-sm no-padding" #dp="angular-mydatepicker">
 										</div>
 									</div>
 								</div>
@@ -50,17 +50,17 @@
 										[formGroupName]="i">
 
 										<div class="col-xs-3 col-sm-2" *ngIf="i !== 0">
-											<select2 [data]="filter_operator" [width]="'100%'"
+											<ng-select2 [data]="filter_operator" [width]="'100%'"
 												class="form-control input-sm no-paddings"
 												(valueChanged)="changeCity($event, 4, i)">
-											</select2>
+											</ng-select2>
 										</div>
 
 										<div class="col-xs-3 col-sm-2">
-											<select2 [data]="filter_type" [width]="'100%'"
+											<ng-select2 [data]="filter_type" [width]="'100%'"
 												class="form-control input-sm no-paddings"
 												(valueChanged)="changeCity($event, 5, i)">
-											</select2>
+											</ng-select2>
 										</div>
 
 										<div class="" [ngClass]="(i < 1) ? 'col-xs-6 col-sm-8' : 'col-xs-4 col-sm-6'">

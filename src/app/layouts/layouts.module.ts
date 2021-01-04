@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { BsDropdownModule } from 'ngx-bootstrap';
+// import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { MainLayout } from './main/main.layout';
 import { BlankLayout } from './blank/blank.layout';
@@ -50,7 +50,7 @@ import { SettingsSubscribeLayout } from './settingsSubscribe/settingsSubscribe.l
 		BrowserModule,
 		RouterModule,
 		ICheckModule,
-		BsDropdownModule.forRoot()
+		// BsDropdownModule.forRoot()
 	],
 	exports: [
 		DashboardLayout,

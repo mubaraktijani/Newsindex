@@ -1,15 +1,16 @@
 import * as _ from 'underscore';
-import 'toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Toastr } from './helpers/toastr.helper';
 
 // const base_url = 'http://localhost/project/newsindex/api';
 // const base_url = 'http://api.newsindex.ng';
-const base_url = 'http://newsindex.projectsmeter.com/api';
+const base_url = 'https://api.newsindex.ng';
+const bookmark_url = 'https://rss.newsindex.ng/';
 
 export class Config {
 	static APP_NAME = 'Newsindex';
 	static BASE_URL = base_url;
+	static BOOKMARK_BASE_URL = bookmark_url;
 
 	static ERROR_TITLE = 'Oh snap!';
 	static SUCCESS_TITLE = 'Oh snap!';
@@ -25,7 +26,7 @@ export class Config {
 	static WHITE_LIST_DOMAINS = [
 		'newsindex.ng',
 		'api.newsindex.ng',
-		'newsindex.projectsmeter.com',
+		'rss.projectsmeter.com',
 		'localhost',
 		'127.0.0.1',
 	];

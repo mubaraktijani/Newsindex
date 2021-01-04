@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BsDropdownModule } from 'ngx-bootstrap';
+// import { BsDropdownModule } from 'ngx-bootstrap';
 declare var jQuery: any;
 
 @Component({
@@ -42,7 +42,10 @@ export class IboxtoolsLayout implements OnInit {
 
 @NgModule({
 	declarations: [IboxtoolsLayout],
-	imports: [BrowserModule, BsDropdownModule.forRoot()],
+	imports: [
+		BrowserModule,
+		// BsDropdownModule.forRoot()
+	],
 	exports: [IboxtoolsLayout],
 })
 

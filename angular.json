@@ -13,6 +13,9 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
+						"allowedCommonJsDependencies": [
+							"lodash"
+						],
 						"outputPath": "dist/newsindex",
 						"index": "src/index.html",
 						"main": "src/main.ts",
@@ -25,7 +28,8 @@
 						"styles": [
 							"./src/assets/styles/plugins/style.css",
 							"./src/styles.scss",
-							"./node_modules/select2/dist/css/select2.min.css"
+							"./node_modules/select2/dist/css/select2.min.css",
+							"./node_modules/ngx-toastr/toastr.css"
 						],
 						"scripts": [
 							"./node_modules/jquery/dist/jquery.js",

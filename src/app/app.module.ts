@@ -31,18 +31,22 @@ import { LayoutsModule } from './layouts/layouts.module';
 // App modules/views
 import { ViewsModule } from 'src/app/views/views.module';
 
+import { ToastrModule } from 'ngx-toastr';
+
 export function getToken() {
 	return Auth.getToken();
 }
 
-const jwtConf: JwtModuleOptions = {
+const jwtConf = {
 	config: {
 		tokenGetter: getToken,
-		whitelistedDomains: Config.WHITE_LIST_DOMAINS,
+		allowedDomains: Config.WHITE_LIST_DOMAINS,
 		throwNoTokenError: false,
 		skipWhenExpired: true,
 	}
 };
+
+console.log(Auth.getToken());
 
 @NgModule({
 	declarations: [],
@@ -59,6 +63,7 @@ const jwtConf: JwtModuleOptions = {
 
 		// JwtModule added
 		JwtModule.forRoot(jwtConf),
+		ToastrModule.forRoot(), // ToastrModule added
 
 		routing,
 	],
